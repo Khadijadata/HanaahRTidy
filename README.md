@@ -1,52 +1,155 @@
+---
+output: github_document
+---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
 
 # HanaahRTidy
 
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of HanaahRTidy is to …
+The goal of HanaahRTidy is to provide a suite of tools that simplify and enhance data manipulation and visualization in R. This package is designed to streamline data cleaning processes and offer intuitive functions for tidy data operations, making it easier for users to prepare their data for analysis.
 
 ## Installation
 
 You can install the development version of HanaahRTidy from
 [GitHub](https://github.com/) with:
 
-``` r
+```{r}
 # install.packages("devtools")
 devtools::install_github("Khadijadata/HanaahRTidy")
 ```
 
-## Example
+## Functions
 
-This is a basic example which shows you how to solve a common problem:
+The package currently includes the following 4 functions:
 
-``` r
+split_datetime() Description: This function splits a datetime column into separate columns for date and time. Usage: split_datetime(datetime_column) Returns: A data frame with additional columns for date and time.
+
+convert_to_factor() Description: This function converts a column with textual values into a factor variable, which is useful for categorical data analyses. Usage: convert_to_factor(text_column) Returns: A factor variable.
+
+import_data() Description: This function imports data from a specified file format (such as CSV, Excel, or others) and converts it into a format suitable for analysis. Usage: import_data(file) Returns: A tibble containing the imported data, ready for analysis.
+
+identify_missing_data() Description: This function summarizes the missing data in each column of a data frame, providing the count and percentage of missing values. Usage: identify_missing_data(data) Returns: A data frame with columns for each column name, the count of missing values, and the percentage of missing values.
+
+### Convert Column to Factor()
+
+This function converts a column with textual values into a factor variable, which is useful for categorical data analyses.
+
+#### Usage
+
+```{r}
 library(HanaahRTidy)
-## basic example code
+convert_to_factor(data, column)
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
+#### Arguments
 
-``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
+- `data`: A data frame containing the column to be converted.
+- `column`: The name of the column to convert (as a string).
+
+#### Value
+
+A data frame with the specified column converted to a factor.
+
+#### Examples
+
+```{r}
+data <- data.frame(gender = c("male", "female", "female", "male"))
+convert_to_factor(data, "gender")
 ```
 
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date. `devtools::build_readme()` is handy for this.
+### Identify Missing Data()
 
-You can also embed plots, for example:
+This function flags missing values in a dataset and provides summary statistics on the percentage of missingness for each column.
 
-<img src="man/figures/README-pressure-1.png" width="100%" />
+#### Usage
 
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub and CRAN.
+```{r}
+identify_missing_data(airquality)
+```
+
+#### Arguments
+
+- `data`: A data frame containing the dataset.
+
+#### Value
+
+A data frame summarizing the missing data statistics.
+
+#### Examples
+
+```{r}
+# Example usage:
+# missing_data_summary <- identify_missing_data(airway_data)
+# print(missing_data_summary)
+```
+
+### Import Data from Excel()
+
+This function imports data from an Excel file and converts it into a format suitable for analysis.
+
+#### Usage
+
+```{r}
+import_data(file_path, sheet = 1)
+```
+
+#### Arguments
+
+- `file_path`: The path to the Excel file.
+- `sheet`: The name or index of the sheet to read.
+
+#### Value
+
+A data frame containing the imported data.
+
+#### Examples
+
+```{r}
+\dontrun{
+  # Example 1: Import data from the first sheet of an Excel file
+  data <- import_data("path/to/file.xlsx")
+
+  # Example 2: Import data from a specific sheet by name
+  data <- import_data("path/to/file.xlsx", sheet = "Sheet1")
+
+  # Example 3: Import data from a specific sheet by index
+  data <- import_data("path/to/file.xlsx", sheet = 2)
+}
+```
+
+### Split Datetime Column into Separate Date and Time Columns
+
+This function takes a datetime column and splits it into separate date and time columns.
+
+#### Usage
+
+```{r}
+split_datetime(datetime_column)
+```
+
+#### Arguments
+
+- `datetime_column`: A column of datetime values.
+
+#### Value
+
+A data frame with separate date and time columns.
+
+#### Examples
+
+```{r}
+datetime_example <- as.POSIXct(c("2020-01-01 12:00:00", "2020-01-02 13:30:00"))
+split_datetime(datetime_example)
+```
