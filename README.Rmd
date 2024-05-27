@@ -1,24 +1,10 @@
----
-output: github_document
----
-
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-
-```{r, include = FALSE, echo=FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  fig.path = "man/figures/README-",
-  out.width = "100%"
-)
-```
 
 # HanaahRTidy
 
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of HanaahRTidy is to provide a suite of tools that simplify and enhance data manipulation and visualization in R. This package is designed to streamline data cleaning processes and offer intuitive functions for tidy data operations, making it easier for users to prepare their data for analysis.
+The goal of HanaahRTidy is to make it easy to clean and organize your data in R. This package includes simple and useful tools that help you tidy up your data, so it's ready for analysis and visualization.
 
 ## Installation
 
