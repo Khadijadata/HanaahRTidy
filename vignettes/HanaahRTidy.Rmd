@@ -1,0 +1,118 @@
+---
+title: "HanaahRTidy"
+author: "Author/creator: [Khadija Zbair]"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{HanaahRTidy}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  warning = FALSE,
+  message = FALSE, 
+  error = TRUE
+)
+```
+
+### Introduction
+
+The `HanaahRTidy` package provides a collection of functions designed to simplify common data manipulation tasks.
+
+### Installation
+
+The package can be installed via:
+- `devtools::install_github("YourGithubUsername/HanaahRTidy")`
+- `install.packages("HanaahRTidy")`
+
+The `HanaahRTidy` package makes use of the following packages:
+- dplyr
+- readr
+
+Suggested packages: 
+- knitr
+- rmarkdown
+
+### Function and Data Explanation
+
+#### convert_to_factor()
+
+- **Description**: This function converts a column with textual values into a factor variable, useful for categorical data analyses.
+- **Usage**: `convert_to_factor(data, column)`
+- **Arguments**:
+  - `data`: A data frame containing the column to be converted.
+  - `column`: The name of the column to convert (as a string).
+- **Returns**: A data frame with the specified column converted to a factor.
+
+#### identify_missing_data()
+
+- **Description**: This function flags missing values in a dataset and provides summary statistics on the percentage of missingness for each column.
+- **Usage**: `identify_missing_data(data)`
+- **Arguments**:
+  - `data`: A data frame containing the dataset.
+- **Returns**: A data frame summarizing the missing data statistics.
+
+#### import_data()
+
+- **Description**: This function imports a dataset from a CSV file and returns a data frame.
+- **Usage**: `import_data(file_path)`
+- **Arguments**:
+  - `file_path`: A string specifying the path to the CSV file.
+- **Returns**: A data frame containing the data from the CSV file.
+
+#### split_datetime()
+
+- **Description**: This function splits a datetime column into separate date and time columns.
+- **Usage**: `split_datetime(datetime_column)`
+- **Arguments**:
+  - `datetime_column`: A column containing datetime values.
+- **Returns**: A data frame with separate date and time columns.
+
+### Function Examples
+
+Loading package:
+
+```{r examples}
+# Load package
+library(HanaahRTidy)
+```
+
+#### convert_to_factor()
+
+```{r}
+data <- data.frame(gender = c("male", "female", "female", "male"))
+converted_data <- convert_to_factor(data, "gender")
+print(converted_data)
+```
+
+#### identify_missing_data()
+
+```{r}
+sample_data <- data.frame(
+  A = c(1, 2, NA, 4),
+  B = c(NA, NA, 3, 4),
+  C = c(1, 2, 3, 4)
+)
+missing_data_summary <- identify_missing_data(sample_data)
+print(missing_data_summary)
+```
+
+#### import_data()
+
+```{r, eval=FALSE}
+# Example usage
+# Note: Replace "path/to/file.csv" with the actual path to your CSV file
+# data <- import_data("path/to/file.csv")
+# print(data)
+```
+
+#### split_datetime()
+
+```{r}
+datetime_values <- as.POSIXct(c("2023-01-01 12:34:56", "2023-01-02 23:45:01"))
+split_datetime_result <- split_datetime(datetime_values)
+print(split_datetime_result)
+```
