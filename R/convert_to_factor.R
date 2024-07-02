@@ -10,6 +10,9 @@
 #' convert_to_factor(data, "gender")
 #' @export
 convert_to_factor <- function(data, column) {
-  data[[column]] <- as.factor(data[[column]])
+  if (!is.data.frame(data) || !column %in% names(data)) {
+    stop("The input data must be a data frame and the column must exist.")
+  }
+  data[[column]] <- factor(data[[column]])
   return(data)
 }

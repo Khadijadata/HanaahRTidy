@@ -11,10 +11,12 @@
 #' # print(missing_data_summary)
 #' @export
 identify_missing_data <- function(data) {
+  missing_counts <- colSums(is.na(data))
+  missing_percentages <- colMeans(is.na(data)) * 100
   missing_summary <- data.frame(
-    Column = colnames(data),
-    MissingCount = sapply(data, function(x) sum(is.na(x))),
-    MissingPercentage = sapply(data, function(x) mean(is.na(x))) * 100
+    Column = names(missing_counts),
+    MissingCount = missing_counts,
+    MissingPercentage = missing_percentages
   )
   return(missing_summary)
 }
